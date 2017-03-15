@@ -16,8 +16,7 @@ than just write them.  You may find comparable functionality in for instance
 |------|----------|
 |`fastq-revcomp`  | Reverse complement a FASTQ file |
 |`fastq-unbreak`  | Revert multiline FASTQ (such as emitted by `vcfutils.pl vcf2fq`) to standard FASTQ |
-|`fastq-uncall`   | Convert bases below a given quality threshold to N ('uncall' the base) |
-|`fastq-to-fasta` | Convert FASTQ to FASTA |
+|`fastq-mask`     | Convert bases not passing quality threshold to lowercase or N |
 
 ## Usage
 

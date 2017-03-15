@@ -48,12 +48,12 @@ int main (int argc, char *argv[])
 			&& getline(std::cin, l3)
 			&& getline(std::cin, l4)))
 		{
-			throw std::runtime_error("no four-line stanza");
+			throw std::runtime_error("no four-line stanza (fastq-unbreak first?)");
 		}
 
 		if (l3[0] != '+') 
 		{
-			throw std::runtime_error("no plus-line");
+			throw std::runtime_error("no plus-line (fastq-unbreak first?)");
 		}
 
 		std::cout << l1 << std::endl; 
