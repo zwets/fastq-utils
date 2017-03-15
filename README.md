@@ -15,7 +15,7 @@ than just write them.  You may find comparable functionality in for instance
 | Tool | Function |
 |------|----------|
 |`fastq-revcomp`  | Reverse complement a FASTQ file |
-|`fastq-unbreak`  | Revert multiline FASTQ (such as emitted by `vcfutils.pl vcf2fq`) to standard FASTQ |
+|`fastq-unbreak`  | Revert multi-line FASTQ (such as emitted by `vcfutils.pl vcf2fq`) to standard FASTQ |
 |`fastq-mask`     | Convert bases not passing quality threshold to lowercase or N |
 
 ## Usage
@@ -24,7 +24,7 @@ All tools read from standard input and write to standard output.  Just pipe
 them together.  For instance,
 
 ```bash
-... | vcfutils.pl vcf2fq | fastq-unbreak | fastq-uncall -t 100 | fastq-to-fasta
+... | vcfutils.pl vcf2fq | fastq-unbreak | fastq-mask -r | fastq-to-fasta
 ```
 
 ## Installation

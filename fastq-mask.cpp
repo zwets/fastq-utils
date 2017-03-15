@@ -23,70 +23,71 @@ static bool flip = true;
 
 void write_masking (const std::string& bs, const std::string& qs, char min_phred)
 {
-	std::string::const_iterator p = bs.begin();
-	std::string::const_iterator p1 = bs.end();
-	std::string::const_iterator q = qs.begin();
-	while (p != p1) {
-		if (flip) {
-			char c = *p++;
-			std::cout << static_cast<char>(*q++ < min_phred ? tolower(c) : toupper(c));
-		}
-		else {
-			std::cout << static_cast<char>(*q++ < min_phred ? repl : toupper(*p));
-			++p;
-		}
-	}
-	std::cout << std::endl;
+    std::string::const_iterator p = bs.begin();
+    std::string::const_iterator p1 = bs.end();
+    std::string::const_iterator q = qs.begin();
+    while (p != p1) {
+        if (flip) {
+            char c = *p++;
+            std::cout << static_cast<char>(*q++ < min_phred ? tolower(c) : toupper(c));
+        }
+        else {
+            std::cout << static_cast<char>(*q++ < min_phred ? repl : toupper(*p));
+            ++p;
+        }
+    }
+    std::cout << std::endl;
 }
 
 int main (int argc, char *argv[]) 
 {
-	int qual = DEFAULT_QUAL;
+    int qual = DEFAULT_QUAL;
 
-	while (*++argv) 
-	{
-		if (!std::strcmp("-q", *argv) && *++argv) {
-			qual = std::atoi(*argv);
-		}
-		else if (!strcmp("-r", *argv)) {
-			flip = false;
-			if (*(argv+1) && **(argv+1) != '-') {
-				repl = **argv;
-			}
-		}
-		else {
-			std::cerr << USAGE;
-			return 1;
-		}
+    while (*++argv) 
+    {
+        if (!std::strcmp("-q", *argv) && *++argv) {
+            qual = std::atoi(*argv);
+        }
+        else if (!strcmp("-r", *argv)) {
+            flip = false;
+            if (*(argv+1) && **(argv+1) != '-') {
+                repl = **argv;
+            }
+        }
+        else {
+            std::cerr << USAGE;
+            return 1;
+        }
 
-		if (qual < 1 || qual > 93 || repl == 0) {
-			std::cerr << USAGE;
-			return 1;
-		}
-	}
-	
-	std::string l1, l2, l3, l4;
+        if (qual < 1 || qual > 93 || repl == 0) {
+            std::cerr << USAGE;
+            return 1;
+        }
+    }
+    
+    std::string l1, l2, l3, l4;
 
-	while (getline(std::cin, l1))
-	{
-		if (! (getline(std::cin, l2) 
-			&& getline(std::cin, l3)
-			&& getline(std::cin, l4)))
-		{
-			throw std::runtime_error("no four-line stanza (fastq-unbreak first?)");
-		}
+    while (getline(std::cin, l1))
+    {
+        if (! (getline(std::cin, l2) 
+            && getline(std::cin, l3)
+            && getline(std::cin, l4)))
+        {
+            throw std::runtime_error("no four-line stanza (fastq-unbreak first?)");
+        }
 
-		if (l3[0] != '+') 
-		{
-			throw std::runtime_error("no plus-line (fastq-unbreak first?)");
-		}
+        if (l3[0] != '+') 
+        {
+            throw std::runtime_error("no plus-line (fastq-unbreak first?)");
+        }
 
-		std::cout << l1 << std::endl; 
-		write_masking(l2, l4, (char)33 + qual);
-		std::cout << l3 << std::endl;
-		std::cout << l4 << std::endl;
-	}
+        std::cout << l1 << std::endl; 
+        write_masking(l2, l4, (char)33 + qual);
+        std::cout << l3 << std::endl;
+        std::cout << l4 << std::endl;
+    }
 
-	return 0;
+    return 0;
 }
 
+// vim: sts=4:sw=4:et:si:ai
