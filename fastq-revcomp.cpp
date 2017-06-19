@@ -10,20 +10,29 @@ void error_exit (const std::string& s, char c = ' ')
     throw std::runtime_error (ss.str());
 }
 
+char complement (char c)
+{
+    switch (c) {
+        case 'A': return 'T';
+        case 'T': return 'A';
+        case 'C': return 'G';
+        case 'G': return 'C';
+        case 'N': return 'N';
+        case 'a': return 't';
+        case 't': return 'a';
+        case 'c': return 'g';
+        case 'g': return 'c';
+        case 'n': return 'n';
+        default: error_exit ("non-base character: ", c);
+    }
+}
+
 void write_reverse_complement (const std::string& s)
 {
     std::string::const_iterator p0 = s.begin();
     std::string::const_iterator p1 = s.end();
     while (p1 != p0) {
-        int c;
-        switch ((c = *--p1)) {
-            case 'A': std::cout << 'T'; break;
-            case 'T': std::cout << 'A'; break;
-            case 'C': std::cout << 'G'; break;
-            case 'G': std::cout << 'C'; break;
-            case 'N': std::cout << 'N'; break;
-            default: error_exit ("non-base character: ", c);
-        }
+        std::cout << complement(*--p1);
     }
     std::cout << std::endl;
 }
