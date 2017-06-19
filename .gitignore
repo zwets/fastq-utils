@@ -1,3 +1,6 @@
 fastq-revcomp
 fastq-unbreak
 fastq-mask
+fastq-to-fasta
+fasta-to-fastq
+test

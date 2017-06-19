@@ -17,6 +17,8 @@ than just write them.  You may find comparable functionality in for instance
 |`fastq-revcomp`  | Reverse complement a FASTQ file |
 |`fastq-unbreak`  | Revert multi-line FASTQ (such as emitted by `vcfutils.pl vcf2fq`) to standard FASTQ |
 |`fastq-mask`     | Convert bases not passing quality threshold to lowercase or N |
+|`fastq-to-fasta` | Convert FASTQ to FASTA |
+|`fasta-to-fastq` | Convert FASTA to FASTQ |
 
 ## Usage
 
@@ -29,5 +31,6 @@ them together.  For instance,
 
 ## Installation
 
-All tools are plain vanilla C++.  To make any tool, just run `make toolname`.
+All tools are plain vanilla C++.  To make any tool, just run `make toolname`
+or `c++ -o toolname toolname.cpp`.
 
