@@ -10,47 +10,45 @@ void error_exit (const std::string& s, char c = ' ')
     throw std::runtime_error (ss.str());
 }
 
-int main (int argc, char *argv[]) 
+int main (int argc, char *argv[])
 {
     std::string line;
 
-    if (getline(std::cin, line)) 
+    bool more = getline(std::cin, line);
+
+    while (more)
     {
-        if (line[0] != '@') {
+        if (line.empty() || line[0] != '@') {
             error_exit("expected character: ", '@');
-            //throw std::runtime_error("expected '@'");
         }
 
-        while (line[0] == '@') {
+        std::cout << line << std::endl;
 
-            int n = 0;
+        long n = 0;
 
-            std::cout << line << std::endl;
+        while ((more = getline(std::cin, line)) && (line.empty() || line[0] != '+'))
+        {
+            std::cout << line;
+            n += line.length();
+        }
 
-            while (getline(std::cin, line) && line[0] != '+') 
-            {
-                std::cout << line;
-                n += line.length();
-            }
+        if (!more || line.empty() || line[0] != '+') {
+            error_exit("expected character: ", '+');
+        }
 
-            if (line[0] != '+') {
-                error_exit("expected character: ", '+');
-            }
+        std::cout << std::endl << line << std::endl;
 
-            std::cout << std::endl << line << std::endl;
+        // take care that the phred score line may start with @
+        while ((more = getline(std::cin, line)) && n != 0)
+        {
+            std::cout << line;
+            n -= line.length();
+        }
 
-            // cater for the case when the phred score line starts with @
-            while (getline(std::cin, line) && (line[0] != '@' || n == 0)) 
-            {
-                std::cout << line;
-                n -= line.length();
-            }
+        std::cout << std::endl;
 
-            std::cout << std::endl;
-
-            if (n != 0) {
-                throw std::runtime_error("length mismatch bases vs phreds");
-            }
+        if (n != 0) {
+            throw std::runtime_error("length mismatch bases vs phreds");
         }
     }
 
