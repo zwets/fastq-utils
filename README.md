@@ -31,6 +31,5 @@ them together.  For instance,
 
 ## Installation
 
-All tools are plain vanilla C++.  To make any tool, just run `make toolname`
-or `c++ -o toolname toolname.cpp`.
+All tools are plain vanilla C++.  To compile, run `make`.
 
