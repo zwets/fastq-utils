@@ -36,7 +36,7 @@ int main (int argc, char *argv[])
     std::string line;
     long count;
     
-    bool more = getline(std::cin, line);
+    bool more = static_cast<bool>(getline(std::cin, line));
 
     while (more)
     {
@@ -49,7 +49,7 @@ int main (int argc, char *argv[])
         std::cout << line << std::endl;
 
         count = 0;
-        while ((more = getline(std::cin, line)) && !line.empty() && line[0] != '>')
+        while ((more = static_cast<bool>(getline(std::cin, line))) && !line.empty() && line[0] != '>')
         {
             count += line.length();
             std::cout << line;

@@ -14,7 +14,7 @@ int main (int argc, char *argv[])
 {
     std::string line;
 
-    bool more = getline(std::cin, line);
+    bool more = static_cast<bool>(getline(std::cin, line));
 
     while (more)
     {
@@ -26,7 +26,7 @@ int main (int argc, char *argv[])
 
         long n = 0;
 
-        while ((more = getline(std::cin, line)) && (line.empty() || line[0] != '+'))
+        while ((more = static_cast<bool>(getline(std::cin, line))) && (line.empty() || line[0] != '+'))
         {
             std::cout << line;
             n += line.length();
@@ -39,7 +39,7 @@ int main (int argc, char *argv[])
         std::cout << std::endl << line << std::endl;
 
         // take care that the phred score line may start with @
-        while ((more = getline(std::cin, line)) && n != 0)
+        while ((more = static_cast<bool>(getline(std::cin, line))) && n != 0)
         {
             std::cout << line;
             n -= line.length();
