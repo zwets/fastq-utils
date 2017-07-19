@@ -3,6 +3,12 @@
 #include <iostream>
 #include <string>
 
+static const std::string USAGE("\n"
+"Usage: fastq-revcomp\n"
+"\n"
+"  Reads FASTQ on stdin, writes its reverse complement on stdout.\n"
+"\n");
+
 void error_exit (const std::string& s, char c = ' ')
 {
     std::stringstream ss;
@@ -49,6 +55,11 @@ void write_reverse_line (const std::string& s)
 
 int main (int argc, char *argv[]) 
 {
+    if (argc != 1) {
+        std::cerr << USAGE;
+        return 1;
+    }
+
     std::string l1, l2, l3, l4;
 
     while (getline(std::cin, l1))

@@ -3,6 +3,12 @@
 #include <iostream>
 #include <string>
 
+static const std::string USAGE("\n"
+"Usage: fastq-unbreak\n"
+"  Reads FASTQ data from stdin.  Rectifies sequences that are\n"
+"  broken across lines into proper FASTQ.  Writes to stdout.\n"
+"\n");
+
 void error_exit (const std::string& s, char c = ' ')
 {
     std::stringstream ss;
@@ -12,6 +18,11 @@ void error_exit (const std::string& s, char c = ' ')
 
 int main (int argc, char *argv[])
 {
+    if (argc != 1) {
+        std::cerr << USAGE;
+        return 1;
+    }
+
     std::string line;
 
     bool more = static_cast<bool>(getline(std::cin, line));

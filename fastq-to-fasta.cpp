@@ -2,8 +2,19 @@
 #include <iostream>
 #include <string>
 
+static const std::string USAGE("\n"
+"Usage: fastq-to-fasta\n"
+"\n"
+"  Reads FASTQ on stdin, extracts the sequence data, writes to stdout.\n"
+"\n");
+
 int main (int argc, char *argv[]) 
 {
+    if (argc != 1) {
+        std::cerr << USAGE;
+        return 1;
+    }
+
     std::string l1, l2, l3, l4;
 
     while (getline(std::cin, l1))

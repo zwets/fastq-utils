@@ -2,7 +2,7 @@
 
 Simple utilities operating on FASTQ files
 
-Homed at: https://github.com/zwets/fastq-utils
+Homed at: <https://github.com/zwets/fastq-utils>
 
 ## Background
 
