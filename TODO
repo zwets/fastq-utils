@@ -1,0 +1,7 @@
+TODO
+
+- replace exception throws by sys.exit
+- take FILE argument(s) on command-line
+- accept gzipped FASTQ (but thread for speed,
+  else zcat file.gz | fastq-* will remain faster)
+- reading and computing on separate threads
