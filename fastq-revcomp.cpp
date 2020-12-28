@@ -16,21 +16,26 @@ void error_exit (const std::string& s, char c = ' ')
     throw std::runtime_error (ss.str());
 }
 
-char complement (char c)
+static const char NUCL_ALPHABET[] = "AaCcGgTtNnKkMmSsWwYyRrBbVvDdHh";
+static const char COMP_ALPHABET[] = "TtGgCcAaNnMmKkWwSsRrYyVvBbHhDd";
+static char REVERSE_TABLE[256] = {
+    0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0 };
+
+void fill_reverse_table()
 {
-    switch (c) {
-        case 'A': return 'T';
-        case 'T': return 'A';
-        case 'C': return 'G';
-        case 'G': return 'C';
-        case 'N': return 'N';
-        case 'a': return 't';
-        case 't': return 'a';
-        case 'c': return 'g';
-        case 'g': return 'c';
-        case 'n': return 'n';
-        default: error_exit ("non-base character: ", c);
-    }
+    for (int i = 0; i < sizeof(NUCL_ALPHABET)-1; ++i)
+        REVERSE_TABLE[NUCL_ALPHABET[i]] = COMP_ALPHABET[i];
+}
+
+inline char complement (char c)
+{
+    char r = REVERSE_TABLE[c];
+    if (!r)
+        error_exit ("non-base character: ", c);
+    return r;
 }
 
 void write_reverse_complement (const std::string& s)
@@ -59,6 +64,8 @@ int main (int argc, char *argv[])
         std::cerr << USAGE;
         return 1;
     }
+
+    fill_reverse_table();
 
     std::string l1, l2, l3, l4;
 
