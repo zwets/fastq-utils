@@ -17,16 +17,16 @@ void error_exit (const std::string& s, char c = ' ')
 }
 
 // static const char NUCL_ALPHABET[] = "AaCcGgTtNnKkMmSsWwYyRrBbVvDdHh";
-// static const char COMP_ALPHABET[] = "TtGgCcAaNnMmKkWwSsRrYyVvBbHhDd";
+// static const char COMP_ALPHABET[] = "TtGgCcAaNnMmKkSsWwRrYyVvBbHhDd";
 static char REVERSE_TABLE[256] = {
   0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
   0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
   0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
   0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
   0 , 'T', 'V', 'G', 'H',  0 ,  0 , 'C', 'D',  0 ,  0 , 'M',  0 , 'K', 'N',  0 ,
-  0 ,  0 , 'Y', 'W', 'A',  0 , 'B', 'S',  0 , 'R',  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
+  0 ,  0 , 'Y', 'S', 'A',  0 , 'B', 'W',  0 , 'R',  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
   0 , 't', 'v', 'g', 'h',  0 ,  0 , 'c', 'd',  0 ,  0 , 'm',  0 , 'k', 'n',  0 ,
-  0 ,  0 , 'y', 'w', 'a',  0 , 'b', 's',  0 , 'r',  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
+  0 ,  0 , 'y', 's', 'a',  0 , 'b', 'W',  0 , 'r',  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
   0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
   0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
   0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,  0 ,
