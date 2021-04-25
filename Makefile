@@ -1,4 +1,4 @@
-CPPFLAGS=-O3
+CPPFLAGS=-O3 -Wall -Wpedantic
 
 all: fasta-to-fastq fastq-mask fastq-revcomp fastq-stats fastq-to-fasta fastq-unbreak
 

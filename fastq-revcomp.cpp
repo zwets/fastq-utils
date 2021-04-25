@@ -39,7 +39,7 @@ static char REVERSE_TABLE[256] = {
 
 inline char complement (char c)
 {
-    char r = REVERSE_TABLE[c];
+    char r = REVERSE_TABLE[c & 0xFF];
     if (!r)
         error_exit ("non-base character: ", c);
     return r;

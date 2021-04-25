@@ -15,13 +15,10 @@ static const std::string USAGE("\n"
 "  Reads FASTQ on stdin, writes tab-separated stats to stdout.\n"
 "\n");
 
-static char BINS[256] = {
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+static char BINS[256];
 
 static void fill_bins() {
+    bzero(BINS, sizeof(BINS));
     BINS['g'] = BINS['G'] = BINS['c'] = BINS['C'] = 1;
     BINS['a'] = BINS['A'] = BINS['t'] = BINS['T'] = 2;
     BINS['N'] = BINS['n'] = 3;
@@ -84,7 +81,7 @@ int main (int argc, char *argv[])
         std::string::const_iterator b1 = l2.end();
 
         while (b != b1) {
-            switch (BINS[*b++]) {
+            switch (BINS[(*b++) & 0xFF]) {
                 case 1: n_gc++; break;
                 case 2: n_at++; break;
                 case 3: n_n++; break;
