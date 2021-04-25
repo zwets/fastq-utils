@@ -1,6 +1,6 @@
 fasta-to-fastq
 fastq-mask
-fastq-revcomp
+fastq-rc
 fastq-stats
 fastq-to-fasta
 fastq-unbreak

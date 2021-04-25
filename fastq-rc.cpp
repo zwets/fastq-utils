@@ -4,7 +4,7 @@
 #include <string>
 
 static const std::string USAGE("\n"
-"Usage: fastq-revcomp\n"
+"Usage: fastq-rc\n"
 "\n"
 "  Reads FASTQ on stdin, writes its reverse complement on stdout.\n"
 "\n");

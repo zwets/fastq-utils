@@ -17,7 +17,7 @@ than just write them.  You may find comparable functionality in for instance
 | Tool | Function |
 |------|----------|
 |`fastq-mask`     | Convert bases not passing quality threshold to lowercase or N |
-|`fastq-revcomp`  | Reverse complement a FASTQ file |
+|`fastq-rc`       | Reverse complement a FASTQ file |
 |`fastq-stats`    | Compute number of reads, bases, and bases passing a Phred threshold in a FASTQ file |
 |`fastq-unbreak`  | Revert multi-line FASTQ (such as emitted by `vcfutils.pl vcf2fq`) to standard FASTQ |
 |`fastq-to-fasta` | Convert FASTQ to FASTA |
