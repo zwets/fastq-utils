@@ -44,15 +44,15 @@ static void fill_bins() {
     BINS['N'] = BINS['n'] = 3;
 }
 
-int main (int argc, char *argv[]) 
+int main (int argc, char *argv[])
 {
     int qual = DEFAULT_QUAL;
-    bool cols = false; 
+    bool cols = false;
     std::string id;
 
     fill_bins();
 
-    while (*++argv) 
+    while (*++argv)
     {
         if (!std::strcmp("-c", *argv)) {
             cols = true;
@@ -99,7 +99,7 @@ int main (int argc, char *argv[])
     {
         n_reads++;
 
-        if (! (getline(std::cin, l2) 
+        if (! (getline(std::cin, l2)
             && getline(std::cin, l3)
             && getline(std::cin, l4)))
         {
@@ -118,7 +118,7 @@ int main (int argc, char *argv[])
             }
         }
 
-        if (l3[0] != '+') 
+        if (l3[0] != '+')
         {
             std::cerr << "fastq-stats: error: no plus-line (fastq-unbreak first?)" << std::endl;
             std::exit(1);
@@ -141,19 +141,21 @@ int main (int argc, char *argv[])
     double n_100k = static_cast<int>(0.5 + 100000.0 * static_cast<double>(n_n) / static_cast<double>(n_bases));
 
     if (cols) {
-        std::cout << '#';
         if (!id.empty()) { std::cout << "id\t"; }
         std::cout << "reads\tbases\tpct_q" << (qual-33) << "\tpct_gc\tn_100k" << std::endl;
         if (!id.empty()) { std::cout << id << '\t'; }
         std::cout << n_reads << '\t' << n_bases << '\t' << pct_qhigh << '\t' << pct_gc << '\t' << n_100k << std::endl;
     }
     else {
-        std::cout << 
-        "n_reads\t" << n_reads << std::endl <<
-        "n_bases\t" << n_bases << std::endl <<
-        "pct_q" << (qual-33) << '\t' << pct_qhigh << std::endl <<
-        "pct_gc\t" << pct_gc << std::endl <<
-        "n_100k\t" << n_100k << std::endl;
+        if (!id.empty()) {
+            std::cout << "id\t" << id << std::endl;
+        }
+        std::cout <<
+            "n_reads\t" << n_reads << std::endl <<
+            "n_bases\t" << n_bases << std::endl <<
+            "pct_q" << (qual-33) << '\t' << pct_qhigh << std::endl <<
+            "pct_gc\t" << pct_gc << std::endl <<
+            "n_100k\t" << n_100k << std::endl;
     }
 
     return 0;
