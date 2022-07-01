@@ -25,12 +25,14 @@
 static const int DEFAULT_QUAL = 30;
 
 static const std::string USAGE("\n"
-"Usage: fastq-stats [-q QUAL]\n"
+"Usage: fastq-stats [-c] [-i ID] [-q QUAL]\n"
 "\n"
 "  Count number of reads, number of bases, bases >= QUAL (default 30),\n"
 "  percent GC, and the number of N bases per 100,000.\n"
 "\n"
 "  Reads FASTQ on stdin, writes tab-separated stats to stdout.\n"
+"  Option -c writes stats across columns rather than across rows.\n"
+"  Option -i prepends a column with ID to the output.\n"
 "\n");
 
 static char BINS[256];
@@ -45,13 +47,23 @@ static void fill_bins() {
 int main (int argc, char *argv[]) 
 {
     int qual = DEFAULT_QUAL;
+    bool cols = false; 
+    std::string id;
 
     fill_bins();
 
     while (*++argv) 
     {
-        if (!std::strcmp("-q", *argv) && *++argv) {
-            qual = std::atoi(*argv);
+        if (!std::strcmp("-c", *argv)) {
+            cols = true;
+        }
+        else if (!std::strcmp("-q", *argv)) {
+            if (*++argv) { qual = std::atoi(*argv); }
+            else { std::cerr << USAGE; return 1; }
+        }
+        else if (!std::strcmp("-i", *argv)) {
+            if (*++argv) { id = *argv; }
+            else { std::cerr << USAGE; return 1; }
         }
         else {
             std::cerr << USAGE;
@@ -128,13 +140,21 @@ int main (int argc, char *argv[])
 
     double n_100k = static_cast<int>(0.5 + 100000.0 * static_cast<double>(n_n) / static_cast<double>(n_bases));
 
-    std::cout << 
+    if (cols) {
+        std::cout << '#';
+        if (!id.empty()) { std::cout << "id\t"; }
+        std::cout << "reads\tbases\tpct_q" << (qual-33) << "\tpct_gc\tn_100k" << std::endl;
+        if (!id.empty()) { std::cout << id << '\t'; }
+        std::cout << n_reads << '\t' << n_bases << '\t' << pct_qhigh << '\t' << pct_gc << '\t' << n_100k << std::endl;
+    }
+    else {
+        std::cout << 
         "n_reads\t" << n_reads << std::endl <<
         "n_bases\t" << n_bases << std::endl <<
         "pct_q" << (qual-33) << '\t' << pct_qhigh << std::endl <<
         "pct_gc\t" << pct_gc << std::endl <<
         "n_100k\t" << n_100k << std::endl;
-    //std::cout << n_reads << '\t' << n_bases << '\t' << pct_qhigh << '\t' << pct_gc << '\t' << n_100k << std::endl;
+    }
 
     return 0;
 }
